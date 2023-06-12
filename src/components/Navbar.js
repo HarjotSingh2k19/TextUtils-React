@@ -1,9 +1,34 @@
 // rfc , impt
-import React from "react";
+import React, {useState} from "react";
 import PropTypes from "prop-types";
 import { Link } from 'react-router-dom';
 
 export default function Navbar(props) {
+
+  const [m1, am1] = useState('active');
+  const [m2, am2] = useState('');
+
+    const toggleAM1 = () => {
+      if(m1 === 'active'){
+        am1('');
+        am2('active');
+      }
+      else{
+        am1('active');
+        am2('');
+      }
+    }
+
+    const toggleAM2 = () => {
+      if(m2 === 'active'){
+        am2('');
+        am1('active')
+      }
+      else{
+        am2('active');
+        am1('')
+      }
+    }
   return (
     <nav
       className={`navbar navbar-expand-lg navbar-${props.mode} bg-${props.mode}`}
@@ -29,7 +54,7 @@ export default function Navbar(props) {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link className="nav-link active" aria-current="page" to="/">
+              <Link className= {`nav-link ${m1}`} onClick= {toggleAM1} aria-current="page" to="/">
                 Home
               </Link>
               {/* <a className="nav-link active" aria-current="page" href="#">
@@ -37,7 +62,7 @@ export default function Navbar(props) {
               </a> */}
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/about">
+              <Link className= {`nav-link ${m2}`} onClick= {toggleAM2} to="/about">
                 {props.aboutText}
               </Link>
 
