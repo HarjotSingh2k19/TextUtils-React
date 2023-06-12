@@ -2,10 +2,10 @@ import logo from "./logo.svg";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import TextForm from "./components/TextForm";
-// import About from "./components/About";
+import About from "./components/About";
 import Alert from "./components/Alert";
 import { useState } from "react";
-// import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 let name = "Harry";
 function App() {
@@ -41,12 +41,12 @@ function App() {
 
   return (
     <>
-      {/* <BrowserRouter>
+      <BrowserRouter>
         <Navbar title="TextUtils" mode={mode} toggleMode={toggleMode} />
         <Alert alert={alert} />
         <div className="container my-3">
           <Routes>
-            <Route exact path="/about" element={<About />}></Route>
+            <Route exact path="/about" element={<About mode = {mode}/>}></Route>
             <Route
               exact
               path="/"
@@ -60,9 +60,9 @@ function App() {
             ></Route>
           </Routes>
         </div>
-      </BrowserRouter> */}
+      </BrowserRouter>
 
-      <Navbar title="TextUtils" mode={mode} toggleMode={toggleMode} />
+      {/* <Navbar title="TextUtils" mode={mode} toggleMode={toggleMode} />
       <Alert alert={alert} />
       <div className="container my-3">
         <TextForm
@@ -70,7 +70,7 @@ function App() {
           heading="Enter the text to analyze below"
           mode={mode}
         />
-      </div>
+      </div> */}
     </>
   );
 }

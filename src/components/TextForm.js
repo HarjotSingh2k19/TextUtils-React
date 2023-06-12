@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 export default function TextForm(props) {
 
+  
   const handleUpClick = () => {
     console.log("Uppercase was clicked" + text);
     let newText = text.toUpperCase();
@@ -27,8 +28,9 @@ export default function TextForm(props) {
   const handleCaptialize = () => {
     console.log("Text is capitalized");
     const lowerCase = text.toLowerCase();
-    const newText = lowerCase[0].toUpperCase() + lowerCase.slice(1);
+    const newText = lowerCase.length > 0 ? lowerCase[0].toUpperCase() + lowerCase.slice(1) : '';
     setText(newText);
+
     props.showAlert("Your text has been capitalized!", "success");
   };
 
@@ -60,7 +62,7 @@ export default function TextForm(props) {
   return (
     <>
     <div className= "container" style = {{color: props.mode === 'dark'? 'white' : '#002b3d'}}>
-      <h1 >{props.heading}</h1>
+      <h1 className= "mb-2">{props.heading}</h1>
       <div className="mb-3">
         <textarea
           className="form-control"
@@ -72,19 +74,19 @@ export default function TextForm(props) {
         ></textarea>
       </div>
 
-      <button className="btn btn-primary mx-2" onClick={handleUpClick}>
+      <button disabled = {text.length === 0} className="btn btn-primary mx-2 my-1" onClick={handleUpClick}>
         Convert to Uppercase
       </button>
-      <button className="btn btn-primary mx-2" onClick={handleLowClick}>
+      <button disabled = {text.length === 0} className="btn btn-primary mx-2 my-1" onClick={handleLowClick}>
         Convert to Lowercase
       </button>
-      <button className="btn btn-primary mx-2" onClick={handleClearClick}>
+      <button disabled = {text.length === 0} className="btn btn-primary mx-2 my-1" onClick={handleClearClick}>
         Clear Text
       </button>
-      <button className="btn btn-primary mx-2" onClick={handleCaptialize}>
+      <button disabled = {text.length === 0} className="btn btn-primary mx-2 my-1" onClick={handleCaptialize}>
         Capitalize Text
       </button>
-      <button className="btn btn-primary mx-2" onClick={handleExtraSpaces}>
+      <button disabled = {text.length === 0} className="btn btn-primary mx-2 my-1" onClick={handleExtraSpaces}>
         Remove Extra Spaces
       </button>
     </div>
@@ -94,7 +96,7 @@ export default function TextForm(props) {
       <p>{calculateWords()} words, {text.length} characters</p>
       <p>{0.008 * calculateWords()} Minutes read</p>
       <h2>Preview</h2>
-      <p>{text.length > 0 ? text : "Enter something in the textbox to preview it here"}</p>
+      <p>{text.length > 0 ? text : "Nothing to preview"}</p>
     </div>
     </>
   );
