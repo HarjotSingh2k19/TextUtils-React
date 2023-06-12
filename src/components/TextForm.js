@@ -5,28 +5,28 @@ export default function TextForm(props) {
 
   
   const handleUpClick = () => {
-    console.log("Uppercase was clicked" + text);
+    // console.log("Uppercase was clicked" + text);
     let newText = text.toUpperCase();
     setText(newText);
     props.showAlert("Converted to Uppercase!", "success");
   };
 
   const handleLowClick = () => {
-    console.log("Lowercase was clicked" + text);
+    // console.log("Lowercase was clicked" + text);
     let newText = text.toLowerCase();
     setText(newText);
     props.showAlert("Converted to Lowercase!", "success");
   };
 
   const handleClearClick = () => {
-    console.log("Text is cleared");
+    // console.log("Text is cleared");
     let newText = '';
     setText(newText);
     props.showAlert("Your text has been cleared!", "success");
   };
   
   const handleCaptialize = () => {
-    console.log("Text is capitalized");
+    // console.log("Text is capitalized");
     const lowerCase = text.toLowerCase();
     const newText = lowerCase.length > 0 ? lowerCase[0].toUpperCase() + lowerCase.slice(1) : '';
     setText(newText);
@@ -45,7 +45,7 @@ export default function TextForm(props) {
     setText(event.target.value);
   };
 
-  const calculateWords = ()=> {
+  const calculateWords = (text)=> {
     let numberOfWords = 0;
     let words = text.split(" ");
     let length = words.length;
@@ -53,6 +53,9 @@ export default function TextForm(props) {
     numberOfWords = words[length - 1] === "" || words[length - 1] === " " ? length-1 : length;
     console.log(words);
     return numberOfWords;
+
+    // By harry with paramter 'text'
+    // text.split(/\s+/).filter((element) => {return element.length !== 0}).length;
   }
 
   const [text, setText] = useState("");
@@ -93,8 +96,8 @@ export default function TextForm(props) {
 
     <div className="container my-3"  style = {{color: props.mode === 'dark'? 'white' : '#002b3d'}}>
       <h2>Your text summary</h2>
-      <p>{calculateWords()} words, {text.length} characters</p>
-      <p>{0.008 * calculateWords()} Minutes read</p>
+      <p>{text.split(/\s+/).filter((element) => {return element.length !== 0}).length} words, {text.length} characters</p>
+      <p>{0.008 * text.split(/\s+/).filter((element) => {return element.length !== 0}).length} Minutes read</p>
       <h2>Preview</h2>
       <p>{text.length > 0 ? text : "Nothing to preview"}</p>
     </div>
